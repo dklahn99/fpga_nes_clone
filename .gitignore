@@ -1,0 +1,5 @@
+nes.cache/
+nes.hw/
+nes.ip_user_files/
+nes.sim/
+nes.xpr
