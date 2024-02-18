@@ -22,7 +22,7 @@ typedef enum {
 
 typedef enum {
     ALUOP_ADC,
-    ALUOP_SUB,
+    ALUOP_SBC,
     ALUOP_AND,
     ALUOP_OR,
     ALUOP_XOR,
