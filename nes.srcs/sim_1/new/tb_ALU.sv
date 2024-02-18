@@ -102,7 +102,86 @@ module tb_ALU();
         alu_in_op = ALUOP_AND;
         #5
         `assert_outputs(8'b1000_0010, 0, 0);
+        
+        // Test OR
+        alu_in_a = 8'b1010_1010;
+        alu_in_b = 8'b1100_0011;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_OR;
+        #5
+        `assert_outputs(8'b1110_1011, 0, 0);
+        
+        // Test XOR
+        alu_in_a = 8'b1010_1010;
+        alu_in_b = 8'b1100_0011;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_XOR;
+        #5
+        `assert_outputs(8'b0110_1001, 0, 0);
+        
+        // Test SHIFT_L
+        alu_in_a = 8'b1010_1010;
+        alu_in_b = 0;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_SHIFT_L;
+        #5
+        `assert_outputs(8'b0101_0100, 1, 0);
+        
+        // Test SHIFT_L
+        alu_in_a = 8'b0010_1010;
+        alu_in_b = 0;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_SHIFT_L;
+        #5
+        `assert_outputs(8'b0101_0100, 0, 0);
+        
+        // Test SHIFT_R
+        alu_in_a = 8'b1010_1011;
+        alu_in_b = 0;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_SHIFT_R;
+        #5
+        `assert_outputs(8'b0101_0101, 1, 0);
+        
+        // Test SHIFT_R
+        alu_in_a = 8'b1010_1010;
+        alu_in_b = 0;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_SHIFT_R;
+        #5
+        `assert_outputs(8'b0101_0101, 0, 0);
 
+        // Test ROT_L
+        alu_in_a = 8'b1010_1010;
+        alu_in_b = 0;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_ROT_L;
+        #5
+        `assert_outputs(8'b0101_0100, 1, 0);
+        
+        // Test ROT_L
+        alu_in_a = 8'b0010_1010;
+        alu_in_b = 0;
+        alu_in_carry = 1;
+        alu_in_op = ALUOP_ROT_L;
+        #5
+        `assert_outputs(8'b0101_0101, 0, 0);
+        
+        // Test ROT_R
+        alu_in_a = 8'b1010_1011;
+        alu_in_b = 0;
+        alu_in_carry = 0;
+        alu_in_op = ALUOP_ROT_R;
+        #5
+        `assert_outputs(8'b0101_0101, 1, 0);
+        
+        // Test ROT_R
+        alu_in_a = 8'b1010_1010;
+        alu_in_b = 0;
+        alu_in_carry = 1;
+        alu_in_op = ALUOP_ROT_R;
+        #5
+        `assert_outputs(8'b1101_0101, 0, 0);
         
 
     end

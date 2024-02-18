@@ -27,6 +27,10 @@ module ALU(
     
     always_comb begin
     
+        // Default carry and overflow values
+        output_carry = 0;
+        output_overflow = 0;
+    
         case (input_op)
             ALUOP_ADC: begin
                 adder_input_a = input_a;
@@ -50,37 +54,35 @@ module ALU(
             
             ALUOP_AND: begin
                 output_result = input_a & input_b;
-                output_carry = 0;
-                output_overflow = 0;
             end
             
-//            ALUOP_OR: begin
-//                output_result = input_a | input_b;
-//            end
+            ALUOP_OR: begin
+                output_result = input_a | input_b;
+            end
             
-//            ALUOP_XOR: begin
-//                output_result = input_a ^ input_b;
-//            end
+            ALUOP_XOR: begin
+                output_result = input_a ^ input_b;
+            end
             
-//            ALUOP_SHIFT_L: begin
-//                output_result = {input_a[6:0], 1b'0};
-//                output_carry = input_a[7];
-//            end
+            ALUOP_SHIFT_L: begin
+                output_result = {input_a[6:0], 1'b0};
+                output_carry = input_a[7];
+            end
             
-//            ALUOP_SHIFT_R: begin
-//                output_result = {1b'0, input_a[7:1]};
-//                output_carry = input_a[0];
-//            end
+            ALUOP_SHIFT_R: begin
+                output_result = {1'b0, input_a[7:1]};
+                output_carry = input_a[0];
+            end
             
-//            ALUOP_ROT_L: begin
-//                output_result = {input_a[6:0], input_carry};
-//                output_carry = input_a[7];
-//            end
+            ALUOP_ROT_L: begin
+                output_result = {input_a[6:0], input_carry};
+                output_carry = input_a[7];
+            end
             
-//            ALUOP_ROT_R: begin
-//                output_result = {input_carry, input_a[7:1]};
-//                output_carry = input_a[0];
-//            end
+            ALUOP_ROT_R: begin
+                output_result = {input_carry, input_a[7:1]};
+                output_carry = input_a[0];
+            end
         endcase
     end
     
