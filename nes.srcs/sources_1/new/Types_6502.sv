@@ -20,7 +20,7 @@ typedef enum {
     TODO
 } AddressingMode;
 
-typedef enum {
+typedef enum logic[3:0] {
     ALUOP_ADC,
     ALUOP_SBC,
     ALUOP_AND,
@@ -40,20 +40,40 @@ typedef enum logic[1:0] {
     BUS_B_SRC_A
 } BUS_B_SRC;
 
-typedef enum {
+typedef enum logic[1:0] {
     BUS_A_DEST_A
 } BUS_A_DEST;
 
-typedef enum {
+typedef enum logic[1:0] {
     BUS_B_DEST_A
 } BUS_B_DEST;
 
-struct packed {
+typedef enum logic[2:0] {
+    DATA_INPUT_DEST_BUFFER,
+    DATA_INPUT_INST_BUFFER,
+    DATA_INPUT_DEST_A,
+    DATA_INPUT_DEST_ALU_B,
+    DATA_INPUT_DEST_PCL,
+    DATA_INPUT_DEST_PCH
+} DATA_INPUT_DEST;
+
+typedef struct packed {
+    DATA_INPUT_DEST data_input_dest;
     BUS_A_SRC bus_a_src;
     BUS_B_SRC bus_b_src;
     BUS_A_DEST bus_a_dest;
     BUS_B_DEST bus_b_dest;
     ALUOp alu_op;
 } Microcode;
+
+typedef logic[7:0] Instruction;
+
+typedef enum logic[2:0] {
+    ADC = 3'b011
+} OPCODE_GROUP_1;
+
+typedef enum logic[2:0] {
+    IMMEDIATE_GROUP_1 = 3'b010
+} ADDR_MODE_GROUP_1;
 
 endpackage
