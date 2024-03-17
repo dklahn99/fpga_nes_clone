@@ -37,34 +37,44 @@ typedef enum logic[1:0] {
 } BUS_A_SRC;
 
 typedef enum logic[1:0] {
-    BUS_B_SRC_A
+    BUS_B_SRC_A,
+    BUS_B_SRC_DATA_INPUT,
+    BUS_B_SRC_ALU_OUT
 } BUS_B_SRC;
 
 typedef enum logic[1:0] {
-    BUS_A_DEST_A
-} BUS_A_DEST;
-
-typedef enum logic[1:0] {
+    BUS_B_DEST_NONE = 0,
     BUS_B_DEST_A
 } BUS_B_DEST;
 
-typedef enum logic[2:0] {
-    DATA_INPUT_DEST_BUFFER,
-    DATA_INPUT_INST_BUFFER,
-    DATA_INPUT_DEST_A,
-    DATA_INPUT_DEST_ALU_B,
+typedef enum logic[1:0] {
+    DATA_INPUT_DEST_NONE = 0,
+    DATA_INPUT_DEST_INST_BUFFER,
     DATA_INPUT_DEST_PCL,
     DATA_INPUT_DEST_PCH
 } DATA_INPUT_DEST;
 
 typedef struct packed {
+    // Data sources
     DATA_INPUT_DEST data_input_dest;
     BUS_A_SRC bus_a_src;
     BUS_B_SRC bus_b_src;
-    BUS_A_DEST bus_a_dest;
     BUS_B_DEST bus_b_dest;
+
+    // Actions to take
     ALUOp alu_op;
+    logic inc_pc;
 } Microcode;
+
+typedef enum logic {
+    RISING_EDGE,
+    FALLING_EDGE
+} CYCLE_EDGE;
+
+typedef struct packed {
+    logic[2:0] cycle;
+    CYCLE_EDGE cycle_edge;
+} InstructionCycle;
 
 typedef logic[7:0] Instruction;
 

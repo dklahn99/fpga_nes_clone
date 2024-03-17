@@ -4,50 +4,23 @@ import Types_6502::*;
 
 module tb_chip_6502();
 
-    logic clk;
+    logic clk = 0;
     
     // Setup clk
     initial begin
-        clk = 1;
+        #10
         forever #10 clk = ~clk;
     end
-
-
-    StatusRegister reg_ST = 0;
-//    typedef struct packed {
-//        logic carry;
-//        logic zero;
-//        logic int_disable;
-//        logic decimal;
-//        logic b_flag;
-//        logic unused;
-//        logic overflow;
-//        logic negative;
-//    } StatusBits;
+    
+    chip_6502 chip_6502(
+        .input_clk(clk)
+    );
         
     initial begin
-        reg_ST.status_struct.carry = 1;
-        #15;
-        reg_ST.status_struct.zero = 1;
-        #15;
-        reg_ST.status_struct.int_disable = 1;
-        #15;
-        reg_ST.status_struct.decimal = 1;
-        #15;
-        reg_ST.status_struct.b_flag = 1;
-        #15;
-        reg_ST.status_struct.unused = 1;
-        #15;
-        reg_ST.status_struct.overflow = 1;
-        #15;
-        reg_ST.status_struct.negative = 1;
-        #15;
-        $finish;
+        #50;
     end
     
-//    chip_6502(
-//        in_clk(clk)
-//    );
+
 
 
 endmodule
